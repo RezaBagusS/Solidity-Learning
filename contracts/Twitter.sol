@@ -3,11 +3,17 @@
 pragma solidity ^0.8.26;
 
 // Objective:
-// 1. Use Require to limit the length of the tweet to be only 280 characters ✅
+// 1. Add function called changedTweetLength to change max tweet length ✅
+// HINT: use newTweetLength as input for function ✅
+// 2. Create a constructor function to set an owner of contract ✅
+// 3. Create a modifier called onlyOwner ✅
+// 4. Use onlyOwner on the changeTweetLength function ✅
 
 contract Twitter {
 
-    uint16 constant MAX_TWEET_LENGTH = 280;
+    mapping (address => Tweet[]) private tweets;
+    uint16 public MAX_TWEET_LENGTH = 280;
+    address public owner;
 
     struct Tweet {
         address author;
@@ -16,7 +22,18 @@ contract Twitter {
         uint256 likes;
     }
 
-    mapping (address => Tweet[]) private tweets;
+    constructor() {
+        owner = msg.sender;
+    }
+
+    modifier onlyOwner() {
+        require(owner == msg.sender, "YOU ARE NOT THE OWNER!!");
+        _;
+    }
+
+    function changedTweetLength(uint16 newTweetLength) public onlyOwner {
+        MAX_TWEET_LENGTH = newTweetLength;
+    }
 
     function createTweet(string memory _tweet) public {
 
@@ -46,4 +63,5 @@ contract Twitter {
     function deleteTweet(address _addr) public {
         delete tweets[_addr];
     }
+    
 }

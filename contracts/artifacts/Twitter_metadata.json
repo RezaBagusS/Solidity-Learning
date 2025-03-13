@@ -6,6 +6,37 @@
 	"output": {
 		"abi": [
 			{
+				"inputs": [],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"inputs": [],
+				"name": "MAX_TWEET_LENGTH",
+				"outputs": [
+					{
+						"internalType": "uint16",
+						"name": "",
+						"type": "uint16"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint16",
+						"name": "newTweetLength",
+						"type": "uint16"
+					}
+				],
+				"name": "changedTweetLength",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "string",
@@ -112,6 +143,19 @@
 				],
 				"stateMutability": "view",
 				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "owner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
 			}
 		],
 		"devdoc": {
@@ -142,11 +186,11 @@
 	},
 	"sources": {
 		"contracts/Twitter.sol": {
-			"keccak256": "0x99080c652cd2ff05cb1e0fc2fb34ee4eeb4c0688aff2b766fce6cdd572458b35",
+			"keccak256": "0x3ef36532e250b31ca0fa06b0d3e2b54a368bb4cb1575a56f89f41548cf00e081",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://d5e831c1f304843f518c73c4d1d09610ec005bd6c8cca5b018dd13c8b2140027",
-				"dweb:/ipfs/QmeKXotgy6Gaq4CLZSEPa2KoqPTuemCrUKHmS2Gt49jWgh"
+				"bzz-raw://6f4626897ee722f5fdd850d985034ba8065f1a6711066969379f20fa7680334e",
+				"dweb:/ipfs/QmaUUmEip9hH5mrg7stYoty1tDQdPjVGUKaD6MUVuWFugQ"
 			]
 		}
 	},
