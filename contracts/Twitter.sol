@@ -3,19 +3,23 @@
 pragma solidity ^0.8.26;
 
 // Objective:
-// 1. Add function called changedTweetLength to change max tweet length ✅
-// HINT: use newTweetLength as input for function ✅
-// 2. Create a constructor function to set an owner of contract ✅
-// 3. Create a modifier called onlyOwner ✅
-// 4. Use onlyOwner on the changeTweetLength function ✅
+// 1. Add id to Tweet Struct to make every Tweet Unique ✅
+// 2. Set the id to be the Tweet[] length ✅
+// HINT: You do it in the createTweet function
+// 3. Add a function to like the tweet
+// HINT: there should be 2 parameters, id and author
+// 4. Add a function to unlike the tweet
+// HINT: make sure you can unlike only if likes count is greater then 0
+// 5. Mark both functions external
 
 contract Twitter {
 
-    mapping (address => Tweet[]) private tweets;
+    mapping (address => Tweet[]) public tweets;
     uint16 public MAX_TWEET_LENGTH = 280;
     address public owner;
 
     struct Tweet {
+        uint256 id;
         address author;
         string content;
         uint256 timestamp;
@@ -40,6 +44,7 @@ contract Twitter {
         require(bytes(_tweet).length <= MAX_TWEET_LENGTH, "Tweet is to long, max 280 characters");
 
         Tweet memory newTweet = Tweet({
+            id: tweets[msg.sender].length,
             author: msg.sender,
             content: _tweet, 
             timestamp: block.timestamp,
@@ -63,5 +68,18 @@ contract Twitter {
     function deleteTweet(address _addr) public {
         delete tweets[_addr];
     }
-    
+
+    function likeTweet(uint256 id, address author) external {
+        require(tweets[author][id].id == id, "TWEET DOES NOT EXIST");
+
+        tweets[author][id].likes++;
+    }
+
+    function unlikeTweet(uint256 id, address author) external {
+        require(tweets[author][id].id == id, "TWEET DOES NOT EXIST");
+        require(tweets[author][id].likes > 0, "TWEET DOES NOT LIKED");
+
+        tweets[author][id].likes--;
+    }
+
 }
