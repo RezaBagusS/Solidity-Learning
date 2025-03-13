@@ -10,14 +10,18 @@ pragma solidity ^0.8.26;
 
 contract Twitter {
 
-    mapping (address => string) private tweets;
+    mapping (address => string[]) private tweets;
 
     function createTweet(string memory _tweet) public {
-        tweets[msg.sender] = _tweet;
-        // tweets[key] = value
+        tweets[msg.sender].push(_tweet);
     }  
 
-    function getTweets(address _owner) public view returns (string memory) {
+    function getTweets(address _owner, uint256 _i) public view returns (string memory) {
+        return tweets[_owner][_i];
+        // Sama kaya tweets.owner[i]
+    }
+
+    function getAllTweets(address _owner) public view returns (string[] memory) {
         return tweets[_owner];
     }
 
