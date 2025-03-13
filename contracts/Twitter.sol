@@ -3,25 +3,40 @@
 pragma solidity ^0.8.26;
 
 // Objective:
-// 1. Create a Twitter Contract ✅
-// 2. Create a mapping between user and tweet ✅
-// 3. Add function to create a tweet and save it in mapping ✅
-// 4. Create a function to get Tweet ✅
+// 1. Define a Tweet Struct with author, content, timestamp, likes ✅
+// 2. Add the structure to array ✅
+// 3. Test Tweets ✅
 
 contract Twitter {
 
-    mapping (address => string[]) private tweets;
-
-    function createTweet(string memory _tweet) public {
-        tweets[msg.sender].push(_tweet);
-    }  
-
-    function getTweets(address _owner, uint256 _i) public view returns (string memory) {
-        return tweets[_owner][_i];
-        // Sama kaya tweets.owner[i]
+    struct Tweet {
+        address author;
+        string content;
+        uint256 timestamp;
+        uint256 likes;
     }
 
-    function getAllTweets(address _owner) public view returns (string[] memory) {
+    mapping (address => Tweet[]) private tweets;
+
+    function createTweet(string memory _tweet) public {
+        Tweet memory newTweet = Tweet({
+            author: msg.sender,
+            content: _tweet, 
+            timestamp: block.timestamp,
+            likes: 0
+        });
+
+        tweets[msg.sender].push(newTweet);
+    }  
+
+    function getTweets(address _owner, uint256 _i) public view returns (Tweet memory) {
+        require(_i <= tweets[_owner].length, "Invalid tweet index");
+        // Make sure this condition is true to continue, if false will be stop
+
+        return tweets[_owner][_i];
+    }
+
+    function getAllTweets(address _owner) public view returns (Tweet[] memory) {
         return tweets[_owner];
     }
 

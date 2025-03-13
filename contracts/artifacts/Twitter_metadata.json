@@ -42,9 +42,31 @@
 				"name": "getAllTweets",
 				"outputs": [
 					{
-						"internalType": "string[]",
+						"components": [
+							{
+								"internalType": "address",
+								"name": "author",
+								"type": "address"
+							},
+							{
+								"internalType": "string",
+								"name": "content",
+								"type": "string"
+							},
+							{
+								"internalType": "uint256",
+								"name": "timestamp",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "likes",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct Twitter.Tweet[]",
 						"name": "",
-						"type": "string[]"
+						"type": "tuple[]"
 					}
 				],
 				"stateMutability": "view",
@@ -66,9 +88,31 @@
 				"name": "getTweets",
 				"outputs": [
 					{
-						"internalType": "string",
+						"components": [
+							{
+								"internalType": "address",
+								"name": "author",
+								"type": "address"
+							},
+							{
+								"internalType": "string",
+								"name": "content",
+								"type": "string"
+							},
+							{
+								"internalType": "uint256",
+								"name": "timestamp",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "likes",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct Twitter.Tweet",
 						"name": "",
-						"type": "string"
+						"type": "tuple"
 					}
 				],
 				"stateMutability": "view",
@@ -103,11 +147,11 @@
 	},
 	"sources": {
 		"contracts/Twitter.sol": {
-			"keccak256": "0xe3695c07e1236e93654c418131403510e4e04dfafe3a4d9904a0bbd1b78422ab",
+			"keccak256": "0xe5f00629740a3fe23f41384bf8961e814c1d0e6f2de14eeec79f13cf0c012cc5",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://9adf2f752dc0e383b7eb87d7b70bebbdbeb7be1bc64c3abf5bcb546ff1e7cd51",
-				"dweb:/ipfs/QmULPwjKz8MRhx61XRzYReCS7UGi4UDQxoaVwr7F12qJ4p"
+				"bzz-raw://5ad0a2bf9e33c552cef810dfe0faa2ce82539dc67641c42bde896b58381364a3",
+				"dweb:/ipfs/QmfB7MCWvzL5cadMYruQY4Nfmh61ZsLS2RwhzSts581tSS"
 			]
 		}
 	},
