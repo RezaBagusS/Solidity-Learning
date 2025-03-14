@@ -2,14 +2,15 @@
 
 pragma solidity ^0.8.26;
 
-// Objective:
-// 1. Create function, getTotalLikes, to get total Tweet Likes for the user ✅
-// USE parameters of author ✅
-// 2. Loop over all the tweets ✅
-// 3. Sum up totalLikes ✅
-// 4. Return totalLikes ✅
+import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract Twitter {
+// Objective:
+// 1. Import Ownable.sol contract from OpenZeppelin ✅
+// 2. Inherit Ownable Contract ✅
+// 3. Replace current onlyOwner ✅
+
+contract Twitter is Ownable {
+
     // Event
     event TweetCreated(
         uint256 indexed id,
@@ -33,7 +34,6 @@ contract Twitter {
     mapping(address => Tweet[]) public tweets;
 
     uint16 public MAX_TWEET_LENGTH = 280;
-    address public owner;
 
     struct Tweet {
         uint256 id;
@@ -43,14 +43,8 @@ contract Twitter {
         uint256 likes;
     }
 
-    constructor() {
-        owner = msg.sender;
-    }
-
-    modifier onlyOwner() {
-        require(owner == msg.sender, "YOU ARE NOT THE OWNER!!");
-        _;
-    }
+    // Tambahkan konstruktor untuk memanggil Ownable
+    constructor() Ownable(msg.sender) {}
 
     function changedTweetLength(uint16 newTweetLength) public onlyOwner {
         MAX_TWEET_LENGTH = newTweetLength;
