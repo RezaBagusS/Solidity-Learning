@@ -3,21 +3,35 @@
 pragma solidity ^0.8.26;
 
 // Objective:
-// 1. Create event for creating the tweet, called TweetCreated ✅
-// USE parameters like id, author, content, timestamp ✅
-// 2. Emit the Event in the createTweet() function below ✅
-// 3. Create Event for liking the tweet, called TweetLiked ✅
-// USE parameters like liker, tweetAuthor, tweetId, newLikeCount ✅
-// 4. Emit the event in the likeTweet() function below ✅
+// 1. Create function, getTotalLikes, to get total Tweet Likes for the user ✅
+// USE parameters of author ✅
+// 2. Loop over all the tweets ✅
+// 3. Sum up totalLikes ✅
+// 4. Return totalLikes ✅
 
 contract Twitter {
-
     // Event
-    event TweetCreated (uint256 indexed id, address author, string content, uint timestamp);
-    event TweetLiked (address liker, address tweetAuthor, uint256 tweetId, uint256 newLikeCount);
-    event TweetUnLiked (address unliker, address tweetAuthor, uint256 tweetId, uint256 newLikeCount);
+    event TweetCreated(
+        uint256 indexed id,
+        address author,
+        string content,
+        uint256 timestamp
+    );
+    event TweetLiked(
+        address liker,
+        address tweetAuthor,
+        uint256 tweetId,
+        uint256 newLikeCount
+    );
+    event TweetUnLiked(
+        address unliker,
+        address tweetAuthor,
+        uint256 tweetId,
+        uint256 newLikeCount
+    );
 
-    mapping (address => Tweet[]) public tweets;
+    mapping(address => Tweet[]) public tweets;
+
     uint16 public MAX_TWEET_LENGTH = 280;
     address public owner;
 
@@ -43,21 +57,28 @@ contract Twitter {
     }
 
     function createTweet(string memory _tweet) public {
-
-        require(bytes(_tweet).length <= MAX_TWEET_LENGTH, "Tweet is to long, max 280 characters");
+        require(
+            bytes(_tweet).length <= MAX_TWEET_LENGTH,
+            "Tweet is to long, max 280 characters"
+        );
 
         Tweet memory newTweet = Tweet({
             id: tweets[msg.sender].length,
             author: msg.sender,
-            content: _tweet, 
+            content: _tweet,
             timestamp: block.timestamp,
             likes: 0
         });
 
         tweets[msg.sender].push(newTweet);
 
-        emit TweetCreated(newTweet.id, newTweet.author, newTweet.content, newTweet.timestamp);
-    }  
+        emit TweetCreated(
+            newTweet.id,
+            newTweet.author,
+            newTweet.content,
+            newTweet.timestamp
+        );
+    }
 
     function getTweets(uint256 _i) public view returns (Tweet memory) {
         require(_i <= tweets[msg.sender].length, "Invalid tweet index");
@@ -90,4 +111,14 @@ contract Twitter {
         emit TweetUnLiked(msg.sender, author, id, tweets[author][id].likes);
     }
 
+    // CODE HERE
+    function getTotalLikes(address _author) external view returns (uint256) {
+        uint256 totalLikes;
+
+        for (uint256 i = 0; i < tweets[_author].length; i++) {
+            totalLikes += tweets[_author][i].likes;
+        }
+
+        return totalLikes;
+    }
 }
