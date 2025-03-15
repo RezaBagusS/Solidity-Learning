@@ -6,7 +6,13 @@
 	"output": {
 		"abi": [
 			{
-				"inputs": [],
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_profileContract",
+						"type": "address"
+					}
+				],
 				"stateMutability": "nonpayable",
 				"type": "constructor"
 			},
@@ -340,6 +346,19 @@
 			},
 			{
 				"inputs": [],
+				"name": "profileContract",
+				"outputs": [
+					{
+						"internalType": "contract IProfile",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
 				"name": "renounceOwnership",
 				"outputs": [],
 				"stateMutability": "nonpayable",
@@ -487,11 +506,11 @@
 			]
 		},
 		"contracts/Twitter.sol": {
-			"keccak256": "0xf0c3508869d5b91d593b5c4e2ff24095835d07389dd11eb82d9c1dc9396f9664",
+			"keccak256": "0xbc05ebeddb0a2a4065418802450331855144c515fc8ac3df43f327b2ce2a7a24",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://f4e69cf560b59690088b828fa5e29d096ab929596dc05947cb73d59fe9050156",
-				"dweb:/ipfs/QmXa4ikB6rZwMUtkswxUhww7Bm162Yfb6rk5JABE97uHq4"
+				"bzz-raw://73c86f8620bfc5a21aeaf2d70d2deab4bf4593f574eecdc8eb888d7b5b555065",
+				"dweb:/ipfs/QmWxPdRAYQ9v3hkmCRNGM6MtPw7upePDHyod63ou6PXQWx"
 			]
 		}
 	},
